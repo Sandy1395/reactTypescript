@@ -1,1 +1,0 @@
-export const convertedDate = (date: Date) => `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`

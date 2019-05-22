@@ -1,6 +1,9 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
 import {Item} from "../CommmonInterface/commonInterface";
-import { Input, Button } from 'antd';
+import { Modal, Input, DatePicker  } from 'antd';
+import { addNewItem } from '../Actions/item';
 
 interface AddNewItemFormProps {
     onSubmit(item: Item): void
@@ -21,21 +24,47 @@ class AddNewItemForm extends React.Component<any,Item>{
       this.setState({[event.target.name]: event.target.value});
     };
 
-    onSubmit = ()=> {
-        this.props.onSubmit(this.state);
-    };
+    handleOk = () => {
+        this.props.addItem({...this.state, date: this.state.date, id: this.props.items.length+1});
+        this.setState({ title: '', date: new Date(), desc: ''});
+        this.props.handleClose();
+    }
+
+    handleCancel = () => {
+        this.props.handleClose();
+    }
+
+    handleDateChange = (value: any) => {
+        this.setState({date: value});
+    }
 
     render () {
-        const {title,desc} = this.state;
+        const {title, date, desc} = this.state;
         return (
-            <div>
-                <Input name="title" value={title} onChange={this.onChange}/>
-                <Input name="desc" value={desc} onChange={this.onChange}/>
-                <Button type="primary">Add</Button>
-            </div>
+            <Modal
+                title="Add Item"
+                visible={this.props.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+            >
+                <Input onChange={this.onChange} name="title" value={title}/>
+                <DatePicker onChange={this.handleDateChange} />
+                <Input onChange={this.onChange} name="desc" value={desc}/>   
+            </Modal>
         )
     }
 
 }
 
-export default AddNewItemForm;
+const mapStateToProps = (state: any) => {
+    return {
+        items: state.ItemReducer.itemList
+    }
+  }
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+      addItem: bindActionCreators(addNewItem, dispatch)
+    }
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewItemForm);

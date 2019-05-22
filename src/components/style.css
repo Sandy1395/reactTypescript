@@ -1,0 +1,14 @@
+.list-container {
+    padding: 10%
+}
+
+.list-div {
+    padding: 10px;
+}
+
+.list-div button {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #684c82;
+    font-family: inherit;
+}

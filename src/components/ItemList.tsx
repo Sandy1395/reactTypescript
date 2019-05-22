@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import moment from 'moment'
 import { Table } from 'antd';
 import { Item } from '../CommmonInterface/commonInterface';
 import AddNewItemForm from './AddNewItemForm';
+import './style.css';
 
 interface ItemListProps {
     itemList?: Item[]
@@ -40,7 +42,7 @@ class ItemList extends React.Component<ItemListProps,ItemListState> {
                 title: 'Date',
                 dataIndex: 'date',
                 render: (d: any) => (
-                    <span>{d.toDateString()}
+                    <span>{moment(d).format('L')}
                     </span>
                   ),
             },
@@ -50,10 +52,12 @@ class ItemList extends React.Component<ItemListProps,ItemListState> {
             }
           ]; 
          return (
-            <div>
+            <div className="list-container">
+                <div className="list-div">
                 <button onClick={this.openAddNewForm}> Add new Item </button>
                 <Table columns={columns} dataSource={items} />
                 { addNew && <AddNewItemForm visible={addNew} handleClose={this.openAddNewForm} /> }
+                </div>
             </div>
         )
     }

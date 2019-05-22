@@ -2,11 +2,14 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import {Item} from "../CommmonInterface/commonInterface";
-import { Modal, Input, DatePicker  } from 'antd';
+import { Modal, Input, DatePicker, Form } from 'antd';
 import { addNewItem } from '../Actions/item';
 
+const { TextArea } = Input;
+
 interface AddNewItemFormProps {
-    onSubmit(item: Item): void
+    onSubmit(item: Item): void,
+    visible: boolean,
 }
 
 class AddNewItemForm extends React.Component<any,Item>{
@@ -20,7 +23,9 @@ class AddNewItemForm extends React.Component<any,Item>{
         }
     }
 
-    onChange = (event: any) => {
+    handleChange = (event: any) => {
+        const name: string = event.target.name;
+        const value: string = event.target.value;
       this.setState({[event.target.name]: event.target.value});
     };
 
@@ -47,9 +52,17 @@ class AddNewItemForm extends React.Component<any,Item>{
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
             >
-                <Input onChange={this.onChange} name="title" value={title}/>
-                <DatePicker onChange={this.handleDateChange} />
-                <Input onChange={this.onChange} name="desc" value={desc}/>   
+            <Form className="login-form">
+                <Form.Item>                
+                    <Input placeholder="Enter item" onChange={this.handleChange} name="title" value={title}/>
+                </Form.Item>
+                <Form.Item>
+                    <DatePicker placeholder="select date" onChange={e => this.handleDateChange} />
+                </Form.Item>
+                <Form.Item>
+                    <TextArea placeholder="Enter description" onChange={this.handleChange} name="desc" value={desc}/>   
+                </Form.Item>
+                </Form>
             </Modal>
         )
     }

@@ -17,6 +17,7 @@ export default function ItemReducer (state:ItemReducer=initialState,action:any) 
         case ADD_NEW_ITEM:
             let itemList = [...state.itemList];
             itemList.push(action.payload);
+            console.log('itemList', itemList);
             return {...state,itemList};
         case DISPLAY_ITEMS_BY_ID:
             const selectedItem = state.itemList.find((item:Item)=> item.id === action.payload );

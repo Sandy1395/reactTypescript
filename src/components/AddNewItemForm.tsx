@@ -11,7 +11,7 @@ class AddNewItemForm extends React.Component<AddNewItemFormProps,Item>{
     constructor (props: AddNewItemFormProps) {
         super (props);
         this.state = {
-
+        
         }
     }
 

@@ -1,6 +1,7 @@
 export interface Item {
     id?: number,
     title: string,
-    date: string,
-    desc: string
+    date: Date,
+    desc: string,
+    [key: string]: any
 }

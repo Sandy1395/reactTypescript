@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
+import {Route, BrowserRouter, Switch, Router} from 'react-router-dom';
 import ItemList from './components/ItemList';
 import {createStore,applyMiddleware} from 'redux';
 import reducer from './Reducers/index';
@@ -11,12 +11,12 @@ const store = createStore(reducer,applyMiddleware());
 const App = () => {
     return (
         <Provider store={store}>
-            <Router>
+            <BrowserRouter>
                 <Switch>
                         <Route exact path="/" component={() => <ItemList />}/>
                         <Route exact path="/item/:id" component={() => <div>item route</div>}/>
                 </Switch>
-            </Router>
+            </BrowserRouter>
         </Provider>
     );
 }

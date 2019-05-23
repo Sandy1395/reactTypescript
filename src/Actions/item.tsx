@@ -19,4 +19,12 @@ export function addNewItem(item: Item) {
         type: type.ADD_NEW_ITEM,
         payload: item
     }
+
+}
+
+export function editItem(item: Item) {
+    return {
+        type: type.EDIT_ITEM,
+        payload: item
+    }
 }

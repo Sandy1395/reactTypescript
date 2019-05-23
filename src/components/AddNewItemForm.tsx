@@ -26,7 +26,7 @@ class AddNewItemForm extends React.Component<any,Item>{
     handleChange = (event: any) => {
         const name: string = event.target.name;
         const value: string = event.target.value;
-      this.setState({[event.target.name]: event.target.value});
+      this.setState({[name]: value});
     };
 
     handleOk = () => {
@@ -44,7 +44,7 @@ class AddNewItemForm extends React.Component<any,Item>{
     }
 
     render () {
-        const {title, date, desc} = this.state;
+        const {title, desc} = this.state;
         return (
             <Modal
                 title="Add Item"
@@ -52,16 +52,16 @@ class AddNewItemForm extends React.Component<any,Item>{
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
             >
-            <Form className="login-form">
-                <Form.Item>                
-                    <Input placeholder="Enter item" onChange={this.handleChange} name="title" value={title}/>
-                </Form.Item>
-                <Form.Item>
-                    <DatePicker placeholder="select date" onChange={e => this.handleDateChange} />
-                </Form.Item>
-                <Form.Item>
-                    <TextArea placeholder="Enter description" onChange={this.handleChange} name="desc" value={desc}/>   
-                </Form.Item>
+                <Form className="login-form">
+                    <Form.Item>                
+                        <Input placeholder="Enter item" onChange={this.handleChange} name="title" value={title}/>
+                    </Form.Item>
+                    <Form.Item>
+                        <DatePicker placeholder="select date" onChange={e => this.handleDateChange} />
+                    </Form.Item>
+                    <Form.Item>
+                        <TextArea placeholder="Enter description" onChange={this.handleChange} name="desc" value={desc}/>   
+                    </Form.Item>
                 </Form>
             </Modal>
         )
